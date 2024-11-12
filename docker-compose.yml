@@ -1,14 +1,26 @@
 version: '3.8'
 
 services:
+  nginx:
+    image: nginx-proxy
+    container_name: nginx
+    build:
+      context: ./nginx/
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - my-network
+    depends_on:
+      - frontend
+      - backend
+
   frontend:
     image: client
     container_name: frontend
     build:
       context: ./client/
       dockerfile: Dockerfile
-    ports:
-      - "80:80"
     networks:
       - my-network
       
@@ -18,8 +30,6 @@ services:
     build:
       context: ./api/
       dockerfile: Dockerfile
-    ports:
-      - "5117:80"
     networks:
       - my-network
     environment:

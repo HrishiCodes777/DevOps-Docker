@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_BASE_URL = "http://localhost.sportz.io:5117";
+const API_BASE_URL = "http://localhost.sportz.io";
 
 export const getAllUsers = async () =>{
     try{
