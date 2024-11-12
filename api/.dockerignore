@@ -1,0 +1,9 @@
+bin/
+obj/
+*.user
+*.vsconfig
+.vscode/
+.idea/
+*.log
+*.md
+Dockerfile

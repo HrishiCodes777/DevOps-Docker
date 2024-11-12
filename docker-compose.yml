@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: client
+    container_name: frontend
+    build:
+      context: ./client/
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - my-network
+      
+  backend:
+    image: dotnetapi
+    container_name: backend
+    build:
+      context: ./api/
+      dockerfile: Dockerfile
+    ports:
+      - "5117:80"
+    networks:
+      - my-network
+    environment:
+      - MONGO_URL=mongodb://database:27017
+
+  database:
+    image: mongo
+    container_name: database
+    ports:
+      - "27017:27017"
+    networks:
+      - my-network
+    volumes:
+      - mongo-data:/data/db
+    
+networks:
+  my-network:
+    external: true 
+
+volumes:
+  mongo-data:
+    external: true 
